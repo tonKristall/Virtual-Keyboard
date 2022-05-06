@@ -1,0 +1,64 @@
+@import './mixin.scss';
+@import './var.scss';
+
+.main {
+  width: 100%;
+  max-width: 1200px;
+  @include flex-column($justify: center, $align: center);
+  padding: 50px 20px 10px;
+  .textarea {
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+    resize: vertical;
+    outline: none;
+    font-family: $main-font;
+  }
+}
+.container {
+  max-width: 800px;
+  @include flex-column($justify: center, $align: center);
+  gap: 5px;
+}
+
+.row-keyboard {
+  @include flex-row($justify: center);
+  gap: 5px;
+  .key {
+    position: relative;
+    padding: 0 10px;
+    min-width: 40px;
+    height: 40px;
+    @include flex-row($justify: center, $align: center);
+    flex: none;
+    background-color: aqua;
+    border-radius: 5px;
+    box-shadow: 0.4em 0.4em 5px rgba(122, 122, 122, 0.5);
+    font-family: $main-font;
+    user-select: none;
+    cursor: pointer;
+    transition: 0.05s;
+    .shift-text {
+      position: absolute;
+      top: 0;
+      left: 2px;
+      font-size: 14px;
+      color: $no-active-color;
+    }
+    &.space {
+      min-width: 187px;
+    }
+    &.active {
+      color: $head-color;
+    }
+    &.pressed {
+      min-width: 35px;
+      height: 35px;
+      margin: 2.5px 2.5px 0;
+      padding: 0 7.5px;
+      box-shadow: inset 0 0 6px $head-color,
+        0.3em 0.3em 5px rgba(122, 122, 122, 0.5);
+      transition: 0.05s;
+    }
+  }
+}

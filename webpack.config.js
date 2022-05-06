@@ -12,7 +12,7 @@ const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader
 
 
 const config = {
-  entry: './src/index.ts',
+  entry: './src/index.js',
   devtool: 'source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -75,7 +75,7 @@ module.exports = () => {
   if (isProduction) {
     config.mode = 'production';
     config.plugins.push(new MiniCssExtractPlugin());
-    config.plugins.push(new ESLintPlugin({ extensions: ['ts', 'js'] }));
+    config.plugins.push(new ESLintPlugin({ extensions: ['js'] }));
   } else {
     config.mode = 'development';
   }

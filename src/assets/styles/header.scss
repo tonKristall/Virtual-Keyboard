@@ -1,0 +1,19 @@
+@import './mixin.scss';
+@import './var.scss';
+
+.header {
+  padding: 0 10px;
+  border-bottom: 2px solid $head-color;
+
+  .head {
+    padding-bottom: 10px;
+    font-size: 44px;
+    font-family: $main-font;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    line-height: 60px;
+    text-align: center;
+    color: $head-color;
+  }
+}
