@@ -5,9 +5,57 @@ import { TAGS, HEAD_APP, KEYS_ITEMS } from '../const';
 
 const config = {
   lang: 'en',
-  caps: false,
-  shift: false,
 };
+
+class Controller {
+  constructor(keyboard, keys) {
+    this.keys = keys;
+    this.keyboard = keyboard;
+    this.globalListener();
+    this.caps = false;
+    this.shift = false;
+    this.key = '';
+    this.sortedKeys = this.sortKeys();
+  }
+  sortKeys() {
+    const sortedKeys = {};
+    this.keys.forEach(key => {
+      const keyLang = key.key[config.lang];
+      let modKey = 'normal';
+      if (this.shift && keyLang.shift) {
+        modKey = 'shift';
+      }
+      let valueKey = key.key.code ? key.key.code : keyLang[modKey];
+      sortedKeys[valueKey] = key.keyElement;
+    });
+    return sortedKeys;
+  }
+  globalListener() {
+    window.addEventListener('keydown', (event) => {
+      event.preventDefault();
+      if (event.key === 'Shift') {
+        this.shift = true;
+        this.sortedKeys = this.sortKeys();
+      }
+      const key = event.key.length === 1 ? event.key.toLowerCase() : event.code;
+      const findKey = this.sortedKeys[key];
+      if (findKey && !findKey.classList.contains(main.pressed)) {
+        findKey.classList.add(main.pressed);
+      }
+    });
+    window.addEventListener('keyup', (event) => {
+      if (event.key === 'Shift') {
+        this.shift = false;
+        this.sortedKeys = this.sortKeys();
+      }
+      const key = event.key.length === 1 ? event.key.toLowerCase() : event.code;
+      const findKey = this.sortedKeys[key];
+      if (findKey) {
+        findKey.classList.remove(main.pressed);
+      }
+    });
+  }
+}
 
 class RenderElement {
   _el;
@@ -42,18 +90,57 @@ class KeyElement extends TextElement {
     this.key = key;
     this.textArea = textArea;
     this.addShiftText();
-
   }
   addShiftText() {
     const normalText = this.key[config.lang].normal;
     const shiftText = this.key[config.lang].shift;
-    if (normalText === '') {
+    if (normalText === ' ') {
       this._el.classList.add(main.space);
     }
-    const shiftKey = this._render(TAGS.div, [main.shiftText]);
-    shiftKey.textContent = shiftText;
-    this._el.appendChild(shiftKey);
+    if (shiftText) {
+      const shiftKey = this._render(TAGS.div, [main.shiftText]);
+      shiftKey.textContent = shiftText;
+      this._el.appendChild(shiftKey);
+    }
   }
+  // keyPress() {
+  //   const normalText = this.key[config.lang].normal;
+  //   const shiftText = this.key[config.lang].shift;
+  //   let activeText = shiftText && config.shift ? shiftText : normalText;
+  //   if (!this._el.classList.contains(main.pressed)) {
+  //     this._el.classList.add(main.pressed);
+  //   }
+  //   if (normalText === 'Caps Lock') {
+  //     config.caps = !config.caps;
+  //   }
+  //   if (normalText === 'Shift') {
+  //     config.shift = true;
+  //   }
+  //   if (activeText.length <= 1) {
+  //     let inputText = normalText.toLowerCase();
+  //     if ((config.caps && !config.shift) || (config.shift && !config.caps)) {
+  //       inputText = inputText.toUpperCase();
+  //     }
+  //     this.textArea.value += inputText;
+  //   }
+  // }
+  // keyFree() {
+  //   if (this._el.classList.contains(main.pressed)) {
+  //     this._el.classList.toggle(main.pressed);
+  //   }
+  //   // if (target.textContent === 'Shift') {
+  //   //   config.shift = false;
+  //   // }
+  // };
+  // addListener() {
+  // this._el.addEventListener('mousedown', () => { this.keyPress(); });
+
+  // ['mouseup', 'mouseleave'].forEach(ev => {
+  //   this._el.addEventListener(ev, () => { this.keyFree(); });
+  // });
+
+
+  // }
 
 }
 
@@ -64,15 +151,19 @@ const mainSection = new RenderElement(TAGS.main, [style.container, main.main]).g
 const mainContainer = new RenderElement(TAGS.main, [style.container, main.container]).getEl();
 const textArea = new TextElement('textarea', [main.textarea]).getEl();
 const keyboardContainer = new RenderElement(TAGS.div, [style.container, main.container]).getEl();
-KEYS_ITEMS.forEach(row => {
+const keys = [];
+KEYS_ITEMS.map(row => {
   const rowKeyboard = new RenderElement(TAGS.div, [main.rowKeyboard]).getEl();
   row.forEach(key => {
     const keyElement = new KeyElement(TAGS.div, [main.key, main.active], key, textArea).getEl();
+    keys.push({ key, keyElement });
     rowKeyboard.appendChild(keyElement);
   });
   keyboardContainer.appendChild(rowKeyboard);
 });
 textArea.setAttribute('rows', '10');
+
+const controller = new Controller(keyboardContainer, keys);
 
 headerContainer.appendChild(head);
 mainSection.appendChild(textArea);

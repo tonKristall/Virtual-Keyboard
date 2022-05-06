@@ -37,6 +37,7 @@
     font-family: $main-font;
     user-select: none;
     cursor: pointer;
+    text-transform: capitalize;
     transition: 0.05s;
     .shift-text {
       position: absolute;
