@@ -14,6 +14,8 @@ class Controller {
     this.globalListener();
     this.caps = false;
     this.shift = false;
+    this.ctrl = false;
+    this.changeLang = false;
     this.key = '';
     this.sortedKeys = this.sortKeys();
   }
@@ -21,19 +23,26 @@ class Controller {
     const sortedKeys = {};
     this.keys.forEach(key => {
       const keyLang = key.key[config.lang];
-      let modKey = 'normal';
-      if (this.shift && keyLang.shift) {
-        modKey = 'shift';
+      const modKey = this.shift && keyLang.shift ? 'shift' : 'normal';
+      if (this.changeLang) {
+        key.keyElement.childNodes[0].textContent = key.key[config.lang].normal;
+        if (key.keyElement.children.length) {
+          key.keyElement.childNodes[1].textContent = key.key[config.lang].shift;
+        }
       }
       let valueKey = key.key.code ? key.key.code : keyLang[modKey];
       sortedKeys[valueKey] = key.keyElement;
     });
+    this.changeLang = false;
     return sortedKeys;
   }
   globalListener() {
     window.addEventListener('keydown', (event) => {
       event.preventDefault();
       if (event.key === 'Shift') {
+        if (this.shift) {
+          return;
+        }
         this.shift = true;
         this.sortedKeys = this.sortKeys();
       }
@@ -44,9 +53,16 @@ class Controller {
       }
     });
     window.addEventListener('keyup', (event) => {
+      if (event.key === 'Alt' && event.ctrlKey || event.key === 'Control' && event.altKey) {
+        config.lang = config.lang === 'en' ? 'ru' : 'en';
+        this.changeLang = true;
+        this.sortedKeys = this.sortKeys();
+      }
       if (event.key === 'Shift') {
         this.shift = false;
-        this.sortedKeys = this.sortKeys();
+        if (!this.changeLang) {
+          this.sortedKeys = this.sortKeys();
+        }
       }
       const key = event.key.length === 1 ? event.key.toLowerCase() : event.code;
       const findKey = this.sortedKeys[key];

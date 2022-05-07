@@ -20,8 +20,8 @@ export const KEYS_ITEMS = [
     { en: { normal: '8', shift: '*' }, ru: { normal: '8', shift: '*' } },
     { en: { normal: '9', shift: '(' }, ru: { normal: '9', shift: '(' } },
     { en: { normal: '0', shift: ')' }, ru: { normal: '0', shift: ')' } },
-    { en: { normal: '-', shift: '_' }, ru: { normal: '0', shift: '_' } },
-    { en: { normal: '=', shift: '+' }, ru: { normal: '0', shift: '+' } },
+    { en: { normal: '-', shift: '_' }, ru: { normal: '-', shift: '_' } },
+    { en: { normal: '=', shift: '+' }, ru: { normal: '=', shift: '+' } },
     { en: { normal: 'Backspace' }, ru: { normal: 'Backspace' } },
   ],
   [
