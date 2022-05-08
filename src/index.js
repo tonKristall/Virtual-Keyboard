@@ -1,10 +1,12 @@
 import style from './assets/styles/style.scss';
 import header from './assets/styles/header.scss';
 import main from './assets/styles/main.scss';
-import { TAGS, HEAD_APP, KEYS_ITEMS } from '../const';
+import { TAGS, HEAD_APP, KEYS_ITEMS, LOCALSTORAGE_KEYS } from '../const';
+
+
 
 const config = {
-  lang: 'en',
+  lang: localStorage.getItem(LOCALSTORAGE_KEYS.lang) ? localStorage.getItem(LOCALSTORAGE_KEYS.lang) : 'en',
 };
 
 class Controller {
@@ -68,6 +70,7 @@ class Controller {
     window.addEventListener('keyup', (event) => {
       if (event.key === 'Alt' && event.ctrlKey || event.key === 'Control' && event.altKey) {
         config.lang = config.lang === 'en' ? 'ru' : 'en';
+        localStorage.setItem(LOCALSTORAGE_KEYS.lang, config.lang);
         this.changeLang = true;
         this.sortedKeys = this.sortKeys();
       }
@@ -126,7 +129,7 @@ class KeyElement extends TextElement {
     if (normalText === ' ') {
       this._el.classList.add(main.space);
     }
-    if (shiftText) {
+    if (shiftText !== undefined) {
       const shiftKey = this._render(TAGS.div, [main.shiftText]);
       shiftKey.textContent = shiftText;
       shiftKey.classList.add(main.noActive);

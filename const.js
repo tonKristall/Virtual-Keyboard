@@ -1,3 +1,7 @@
+export const LOCALSTORAGE_KEYS = {
+  lang: 'tonKristall-keyboard-lang'
+};
+
 export const TAGS = {
   div: 'div',
   header: 'header',
@@ -9,7 +13,7 @@ export const HEAD_APP = 'virtual keyboard';
 
 export const KEYS_ITEMS = [
   [
-    { en: { normal: '`', shift: '~' }, ru: { normal: 'Ё' } },
+    { en: { normal: '`', shift: '~' }, ru: { normal: 'Ё', shift: '' } },
     { en: { normal: '1', shift: '!' }, ru: { normal: '1', shift: '!' } },
     { en: { normal: '2', shift: '@' }, ru: { normal: '2', shift: '"' } },
     { en: { normal: '3', shift: '#' }, ru: { normal: '3', shift: '№' } },
@@ -36,8 +40,8 @@ export const KEYS_ITEMS = [
     { en: { normal: 'i' }, ru: { normal: 'ш' } },
     { en: { normal: 'o' }, ru: { normal: 'щ' } },
     { en: { normal: 'p' }, ru: { normal: 'з' } },
-    { en: { normal: '[', shift: '{' }, ru: { normal: 'х' } },
-    { en: { normal: ']', shift: '}' }, ru: { normal: 'ъ' } },
+    { en: { normal: '[', shift: '{' }, ru: { normal: 'х', shift: '' } },
+    { en: { normal: ']', shift: '}' }, ru: { normal: 'ъ', shift: '' } },
     { en: { normal: '\\', shift: '|' }, ru: { normal: '\\', shift: '/' } },
   ],
   [
@@ -51,8 +55,8 @@ export const KEYS_ITEMS = [
     { en: { normal: 'j' }, ru: { normal: 'о' } },
     { en: { normal: 'k' }, ru: { normal: 'л' } },
     { en: { normal: 'l' }, ru: { normal: 'д' } },
-    { en: { normal: ';', shift: ':' }, ru: { normal: 'ж' } },
-    { en: { normal: `'`, shift: '"' }, ru: { normal: 'э' } },
+    { en: { normal: ';', shift: ':' }, ru: { normal: 'ж', shift: '' } },
+    { en: { normal: `'`, shift: '"' }, ru: { normal: 'э', shift: '' } },
     { en: { normal: 'Enter' }, ru: { normal: 'Enter' } },
   ],
   [
@@ -64,8 +68,8 @@ export const KEYS_ITEMS = [
     { en: { normal: 'b' }, ru: { normal: 'и' } },
     { en: { normal: 'n' }, ru: { normal: 'т' } },
     { en: { normal: 'm' }, ru: { normal: 'ь' } },
-    { en: { normal: ',', shift: '<' }, ru: { normal: 'б' } },
-    { en: { normal: '.', shift: '>' }, ru: { normal: 'ю' } },
+    { en: { normal: ',', shift: '<' }, ru: { normal: 'б', shift: '' } },
+    { en: { normal: '.', shift: '>' }, ru: { normal: 'ю', shift: '' } },
     { en: { normal: '/', shift: '?' }, ru: { normal: '.', shift: ',' } },
     { en: { normal: '▲' }, ru: { normal: '▲' }, code: 'ArrowUp' },
     { en: { normal: 'Shift' }, ru: { normal: 'Shift' }, code: 'ShiftRight' },
