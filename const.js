@@ -50,6 +50,7 @@ export const KEYS_ITEMS = [
     { en: { normal: '[', shift: '{' }, ru: { normal: 'х', shift: '' }, code: 'BracketLeft' },
     { en: { normal: ']', shift: '}' }, ru: { normal: 'ъ', shift: '' }, code: 'BracketRight' },
     { en: { normal: '\\', shift: '|' }, ru: { normal: '\\', shift: '/' }, code: 'Backslash' },
+    { en: { normal: 'Del' }, ru: { normal: 'Del' }, code: 'Delete' },
   ],
   [
     { en: { normal: 'CapsLock' }, ru: { normal: 'CapsLock' }, code: 'CapsLock' },

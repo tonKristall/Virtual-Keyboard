@@ -104,6 +104,7 @@ export default class Controller {
       const nodeList = Array.from(this.keyboard.children);
       let key = event.target;
       if (nodeList.includes(key)) {
+        this.textArea.focus();
         return;
       }
       if (!nodeList.includes(key.parentElement)) {
@@ -116,12 +117,12 @@ export default class Controller {
       }
       key.addEventListener('mouseleave', keyFree);
       this.inputTextArea(key);
-      this.textArea.focus();
     });
 
     this.keyboard.addEventListener('mouseup', (event) => {
       const nodeList = Array.from(this.keyboard.children);
       let key = event.target;
+      this.textArea.focus();
       if (nodeList.includes(key)) {
         return;
       }
@@ -132,7 +133,6 @@ export default class Controller {
         key = key.parentElement;
       }
       key.classList.remove(main.pressed);
-      this.textArea.focus();
     });
   }
 
@@ -146,6 +146,12 @@ export default class Controller {
       this.textArea.focus();
       this.textArea.selectionStart = this.textArea.value.length;
       this.textArea.selectionEnd = this.textArea.value.length;
+    }
+    if (value === 'Del') {
+      if (this.textArea.selectionStart === this.textArea.selectionEnd) {
+        this.textArea.selectionEnd = this.textArea.selectionStart + 1;
+      }
+      this.textArea.setRangeText('');
     }
     if (value === 'Backspace') {
       if (this.textArea.selectionStart === this.textArea.selectionEnd) {
