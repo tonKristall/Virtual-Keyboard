@@ -30,6 +30,19 @@ class Controller {
           key.keyElement.childNodes[1].textContent = key.key[config.lang].shift;
         }
       }
+      key.keyElement.classList.remove(main.noActive);
+      key.keyElement.classList.add(main.active);
+      if (key.keyElement.children.length && key.keyElement.children[0].textContent.length) {
+        if (this.shift) {
+          key.keyElement.classList.remove(main.active);
+          key.keyElement.classList.add(main.noActive);
+          key.keyElement.children[0].classList.remove(main.noActive);
+          key.keyElement.children[0].classList.add(main.active);
+        } else {
+          key.keyElement.children[0].classList.add(main.noActive);
+          key.keyElement.children[0].classList.remove(main.active);
+        }
+      }
       let valueKey = key.key.code ? key.key.code : keyLang[modKey];
       sortedKeys[valueKey] = key.keyElement;
     });
@@ -116,6 +129,7 @@ class KeyElement extends TextElement {
     if (shiftText) {
       const shiftKey = this._render(TAGS.div, [main.shiftText]);
       shiftKey.textContent = shiftText;
+      shiftKey.classList.add(main.noActive);
       this._el.appendChild(shiftKey);
     }
   }

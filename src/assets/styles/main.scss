@@ -24,6 +24,12 @@
 .row-keyboard {
   @include flex-row($justify: center);
   gap: 5px;
+  .active {
+    color: $head-color;
+  }
+  .no-active {
+    color: $no-active-color;
+  }
   .key {
     position: relative;
     padding: 0 10px;
@@ -44,13 +50,9 @@
       top: 0;
       left: 2px;
       font-size: 14px;
-      color: $no-active-color;
     }
     &.space {
       min-width: 187px;
-    }
-    &.active {
-      color: $head-color;
     }
     &.pressed {
       min-width: 35px;
