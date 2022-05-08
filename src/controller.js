@@ -98,6 +98,12 @@ export default class Controller {
       if (event.target.textContent === 'CapsLock') {
         this.caps.press = false;
       }
+      if (event.target.textContent === 'Shift') {
+        this.shift = false;
+        if (!this.changeLang) {
+          this.sortedKeys = this.sortKeys();
+        }
+      }
       this.textArea.focus();
     };
     this.keyboard.addEventListener('mousedown', (event) => {
@@ -111,6 +117,13 @@ export default class Controller {
         key = key.parentElement;
       }
       key.classList.add(main.pressed);
+      if (key.textContent === 'Shift') {
+        if (this.shift) {
+          return;
+        }
+        this.shift = true;
+        this.sortedKeys = this.sortKeys();
+      }
       if (key.textContent === 'CapsLock') {
         this.caps.on = !this.caps.on;
         this.caps.press = true;
@@ -125,6 +138,12 @@ export default class Controller {
       this.textArea.focus();
       if (nodeList.includes(key)) {
         return;
+      }
+      if (key.textContent === 'Shift') {
+        this.shift = false;
+        if (!this.changeLang) {
+          this.sortedKeys = this.sortKeys();
+        }
       }
       if (key.textContent === 'CapsLock') {
         this.caps.press = false;
