@@ -75,9 +75,9 @@ module.exports = () => {
   if (isProduction) {
     config.mode = 'production';
     config.plugins.push(new MiniCssExtractPlugin());
-    config.plugins.push(new ESLintPlugin({ extensions: ['js'] }));
   } else {
     config.mode = 'development';
   }
+  config.plugins.push(new ESLintPlugin({ extensions: ['js'] }));
   return config;
 };

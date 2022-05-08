@@ -1,8 +1,9 @@
 export default class RenderElement {
   el;
+
   constructor(tag, className) {
+    this.renderEl = null;
     this.setEl(tag, className);
-    this.renderEl;
   }
 
   render(tag, className) {

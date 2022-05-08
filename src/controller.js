@@ -141,30 +141,38 @@ export default class Controller {
     if (key.children.length && key.childNodes[1].textContent.length && this.shift) {
       value = key.childNodes[1].textContent;
     }
-    console.log(value);
     if (document.activeElement !== this.textArea) {
       this.textArea.focus();
       this.textArea.selectionStart = this.textArea.value.length;
       this.textArea.selectionEnd = this.textArea.value.length;
     }
-    if (value === 'Del') {
-      if (this.textArea.selectionStart === this.textArea.selectionEnd) {
-        this.textArea.selectionEnd = this.textArea.selectionStart + 1;
+    switch (value) {
+      case 'Del': {
+        if (this.textArea.selectionStart === this.textArea.selectionEnd) {
+          this.textArea.selectionEnd = this.textArea.selectionStart + 1;
+        }
+        this.textArea.setRangeText('');
+        break;
       }
-      this.textArea.setRangeText('');
-    }
-    if (value === 'Backspace') {
-      if (this.textArea.selectionStart === this.textArea.selectionEnd) {
-        this.textArea.selectionStart = this.textArea.selectionEnd - 1;
+      case 'Backspace': {
+        if (this.textArea.selectionStart
+          && this.textArea.selectionStart === this.textArea.selectionEnd) {
+          this.textArea.selectionStart = this.textArea.selectionEnd - 1;
+        }
+        this.textArea.setRangeText('');
+        break;
       }
-      this.textArea.setRangeText('');
-    }
-    if (value === "Caps")
-      if (value === 'Enter') {
+      case 'Enter': {
         value = SYMBOLS_KEY.enter;
+        break;
       }
-    if (value === 'Tab') {
-      value = SYMBOLS_KEY.tab;
+      case 'Tab': {
+        value = SYMBOLS_KEY.tab;
+        break;
+      }
+      default: {
+        break;
+      }
     }
     if (value.length === 1 || value === SYMBOLS_KEY.enter || value === SYMBOLS_KEY.tab) {
       if ((this.caps.on && !this.shift) || (!this.caps.on && this.shift)) {
