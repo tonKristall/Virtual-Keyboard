@@ -1,12 +1,14 @@
 export const LOCALSTORAGE_KEYS = {
-  lang: 'tonKristall-keyboard-lang'
+  lang: 'tonKristall-keyboard-lang',
 };
 
 export const TAGS = {
   div: 'div',
   header: 'header',
   main: 'main',
-  h1: 'h1'
+  h1: 'h1',
+  textarea: 'textarea',
+  footer: 'footer',
 };
 
 export const HEAD_APP = 'virtual keyboard';
@@ -84,6 +86,10 @@ export const KEYS_ITEMS = [
     { en: { normal: '◄' }, ru: { normal: '◄' }, code: 'ArrowLeft' },
     { en: { normal: '▼' }, ru: { normal: '▼' }, code: 'ArrowDown' },
     { en: { normal: '►' }, ru: { normal: '►' }, code: 'ArrowRight' },
-  ]
+  ],
 ];
 
+export const TEXT_FOOTER = {
+  system_info: 'Клавиатура создана в операционной системе Windows',
+  change_lang: 'Комбинация для переключения языка: левый Alt + Ctrl',
+};
