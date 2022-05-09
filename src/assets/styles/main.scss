@@ -55,6 +55,9 @@
     }
     &.space {
       min-width: 187px;
+      &.pressed {
+        min-width: 182px;
+      }
     }
     &.pressed {
       min-width: 35px;
