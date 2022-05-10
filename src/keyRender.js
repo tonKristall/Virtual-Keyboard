@@ -24,39 +24,4 @@ export default class KeyElement extends TextElement {
       this.el.appendChild(shiftKey);
     }
   }
-  // keyPress() {
-  //   const normalText = this.key[config.lang].normal;
-  //   const shiftText = this.key[config.lang].shift;
-  //   let activeText = shiftText && config.shift ? shiftText : normalText;
-  //   if (!this._el.classList.contains(main.pressed)) {
-  //     this._el.classList.add(main.pressed);
-  //   }
-  //   if (normalText === 'Caps Lock') {
-  //     config.caps = !config.caps;
-  //   }
-  //   if (normalText === 'Shift') {
-  //     config.shift = true;
-  //   }
-  //   if (activeText.length <= 1) {
-  //     let inputText = normalText.toLowerCase();
-  //     if ((config.caps && !config.shift) || (config.shift && !config.caps)) {
-  //       inputText = inputText.toUpperCase();
-  //     }
-  //     this.textArea.value += inputText;
-  //   }
-  // }
-  // keyFree() {
-  //   if (this._el.classList.contains(main.pressed)) {
-  //     this._el.classList.toggle(main.pressed);
-  //   }
-  //   // if (target.textContent === 'Shift') {
-  //   //   config.shift = false;
-  //   // }
-  // };
-  // addListener() {
-  // this._el.addEventListener('mousedown', () => { this.keyPress(); });
-  // ['mouseup', 'mouseleave'].forEach(ev => {
-  //   this._el.addEventListener(ev, () => { this.keyFree(); });
-  // });
-  // }
 }
