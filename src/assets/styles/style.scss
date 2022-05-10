@@ -1,0 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  background-color: aliceblue;
+}
+
+.wrapper {
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  margin: 0 auto;
+}

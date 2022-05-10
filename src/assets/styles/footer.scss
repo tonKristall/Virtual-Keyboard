@@ -1,0 +1,10 @@
+@import './var.scss';
+@import './mixin.scss';
+
+.footer {
+  @include flex-column($justify: center, $align: center);
+  font-family: $main-font;
+  border-top: 2px solid $head-color;
+  color: $head-color;
+  height: 100px;
+}
